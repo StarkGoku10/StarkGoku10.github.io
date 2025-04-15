@@ -68,7 +68,7 @@ const SocialLinks: React.FC = () => {
         {/* Social media links with icons */}
         <a href="https://www.linkedin.com/in/shreyas-acharya-10gma/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
         <a href="https://github.com/StarkGoku10" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-        <a href="https://tjklint.com" target="_blank" rel="noopener noreferrer"><FaGlobe /></a>
+        <a href="https://starkgoku10.github.io/" target="_blank" rel="noopener noreferrer"><FaGlobe /></a>
         <a href="https://medium.com/@shreyasacharya3000" target="_blank" rel="noopener noreferrer"><FaMedium /></a>
         <a href="/resume/resume.pdf" target="_blank" rel="noopener noreferrer"><FaFileAlt /></a>
       </SocialIcons>
