@@ -1,0 +1,41 @@
+{
+  "education": [
+    {
+      "degree": "Master of Engineering in Robotics",
+      "institution": "University of Maryland, College Park",
+      "dates": "August 2023 - May 2025",
+      "courses": [
+        "Multimodal Foundation Models",
+        "Computer Processing of Pictoral information",
+        "Perception of Autonomous Robots",
+        "Planning of Aotomonous Rotbots",
+        "Software Design and Implementation",
+        "Robot Learning"
+      ]
+    },
+    {
+      "degree": "Bachelor of Engineering in Computer Engineering",
+      "institution": "Savitribai Phule Pune University",
+      "dates": "August 2019 - May 2023",
+      "courses": [
+        "Data Structures and Algorithms",
+        "Machine Learning",
+        "Artificial Intelligence",
+        "Database Management Systems",
+        "Deep learning"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Machine Learning Engineer",
+      "company": "techR Business Solutions",
+      "dates": "January 2023 - July 2023",
+      "responsibilities": [
+        "Implemented and deployed a deep learning model(Resnet) for real-time human action recognition using OpenCV's DNN module.",
+        "Developed a real-time video processing pipeline that captures live video feed, perform inference using the action recognition model and classify from 400 distinct activities and raises an alarm if an unusual ativity is detected.",
+        "Engineered a web application using Flask and SocketIO to stream and display real-time action recognition resylts to the user interface."
+      ]
+    }
+  ]
+}

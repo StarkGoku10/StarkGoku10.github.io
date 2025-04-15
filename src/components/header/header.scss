@@ -1,0 +1,154 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  font-family: 'RobotoMono', sans-serif;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #e1e1e1;
+  text-decoration: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  .superman-logo {
+    width: 50px;
+    height: 35px;
+    position: relative;
+    background: rgb(33, 223, 230);
+    clip-path: polygon(50% 0%, 100% 20%, 100% 60%, 50% 100%, 0% 60%, 0% 20%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      width: 42px;
+      height: 29px;
+      background: #1e1e1e;
+      clip-path: polygon(50% 0%, 100% 20%, 100% 60%, 50% 100%, 0% 60%, 0% 20%);
+    }
+    
+    &:after {
+      content: 'S';
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgb(33, 223, 230);
+      font-size: 20px;
+      font-family: 'Arial Black', sans-serif;
+      font-weight: 900;
+    }
+  }
+  
+  &:hover .superman-logo {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(33, 223, 230, 0.5);
+  }
+  
+  &:hover {
+    color: #05f7f7;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e;
+    flex-direction: column;
+    justify-content: center;
+    transition: right 0.3s ease-in-out;
+    z-index: 999;
+
+    &.open {
+      right: 0;
+    }
+  }
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  color: #d3d3d3;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+  font-family: 'RobotoMono', sans-serif;
+
+  &:hover {
+    color: #05f7f7;
+  }
+
+  svg {
+    margin-right: 8px;
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  padding: 8px 16px;
+  border: 2px solid #038f94;
+  color: #0fe7dc;
+  text-decoration: none;
+  font-size: 18px;
+  transition: all 0.3s;
+  font-family: 'RobotoMono', sans-serif;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #05f7f7;
+    color: #fff;
+  }
+
+  svg {
+    margin-right: 8px;
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+  }
+}
+
+.close-icon {
+  display: block;
+  z-index: 1002;
+}
