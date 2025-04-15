@@ -39,6 +39,7 @@ const Techstack: React.FC = () => {
               <div className="technology-item"><SiRos /><p>MoveIt</p></div>
               <div className="technology-item"><SiNvidia /><p>CUDA</p></div>
               <div className="technology-item"><SiWebpack /><p>RESTful API</p></div>
+              <div className="technology-item"><SiHuggingface /><p>LangChain</p></div>
             </div>
           </div>
 
