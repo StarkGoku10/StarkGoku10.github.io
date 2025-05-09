@@ -82,10 +82,11 @@ const Resume: React.FC = () => {
                   </li>
                   <li className="bullet-point">
                     Developed a real-time video processing pipeline that captures live video feed, perform inference using the
-                     action recognition model and classify from 400 distinct activities and raises an alarm if an unusual ativity is detected.
+                     action recognition model and classify from 400 distinct activities achieving over 84% accuracy.
                   </li>
                   <li className="bullet-point">
-                    Engineered a web application using Flask and SocketIO to stream and display real-time action recognition resylts to the user interface.  
+                  Integrated a user-friendly Flask-based web interface for remote monitoring, 
+                  featuring an interactive display and automated alerts that flagged suspicious activities with over 90% precision.  
                   </li>
                 </ul>
               </div>
