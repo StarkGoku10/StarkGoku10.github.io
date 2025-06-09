@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaGithub, FaLinkedin, FaGlobe, FaMedium, FaFileAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaMedium, FaFileAlt } from 'react-icons/fa';
+import { SiGmail } from 'react-icons/si';
 
 // Container for the entire social section
 const SocialContainer = styled.div`
@@ -68,7 +69,7 @@ const SocialLinks: React.FC = () => {
         {/* Social media links with icons */}
         <a href="https://www.linkedin.com/in/shreyas-acharya-10gma/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
         <a href="https://github.com/StarkGoku10" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-        <a href="https://starkgoku10.github.io/" target="_blank" rel="noopener noreferrer"><FaGlobe /></a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shreyasacharya3000@gmail.com" target="_blank" rel="noopener noreferrer"><SiGmail /></a>
         <a href="https://medium.com/@shreyasacharya3000" target="_blank" rel="noopener noreferrer"><FaMedium /></a>
         <a href="/resume/resume.pdf" target="_blank" rel="noopener noreferrer"><FaFileAlt /></a>
       </SocialIcons>
