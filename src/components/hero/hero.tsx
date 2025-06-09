@@ -1,6 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
-import Thirdeye from '../../assets/Thirdeye/webp/Thirdeye.gif'; // Importing hero animation image
+import ParticleSphere from '../ParticleSphere/ParticleSphere'; // Import the new component
+
+// Particle interface for 3D sphere animation
+interface Particle {
+  x: number;
+  y: number;
+  z: number; // Added Z coordinate for 3D
+  vx: number;
+  vy: number;
+  vz: number; // Added Z velocity for 3D movement
+  radius: number;
+  color: string;
+  opacity: number; // For fade effects
+  originalTheta: number; // Spherical coordinates
+  originalPhi: number;
+  sphereRadius: number; // Distance from sphere center
+}
 
 // Main container for the hero section
 const HeroContainer = styled.section`
@@ -37,19 +53,26 @@ const LeftContainer = styled.div`
   }
 `;
 
-// Right container for the hero animation
+// Right container for the particle animation
 const RightContainer = styled.div`
   flex: 1;
   position: relative;
   display: flex;
-  justify-content: center; /* Center the hero animation horizontally */
-  align-items: center; /* Center the hero animation vertically */
+  justify-content: center; /* Center the animation horizontally */
+  align-items: center; /* Center the animation vertically */
   overflow: hidden;
   min-height: 50vh;
 
   @media (min-width: 768px) {
     flex: 0 0 65%;
   }
+`;
+
+// Canvas for particle system
+const ParticleCanvas = styled.canvas`
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
 `;
 
 // Floating animation for the hero image
@@ -63,79 +86,6 @@ const floatAnimation = keyframes`
   100% {
     transform: translateY(0);
   }
-`;
-
-// Styling for the hero image with floating animation
-const HeroImage = styled.img`
-  width: 80%;
-  z-index: 1;
-  animation: ${floatAnimation} 3s infinite;
-
-  @media (min-width: 768px) {
-    width: 50%;
-  }
-`;
-
-// Animation for shrinking and moving shapes
-const shrinkAndMove = (left: number, top: number, containerWidth: number, containerHeight: number) => keyframes`
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(${containerWidth / 2 - left}px, ${containerHeight / 2 - top}px) scale(0);
-    opacity: 0;
-  }
-`;
-
-// Define shape types as a constant
-const shapeTypes = ['circle', 'triangle', 'square', 'cross'] as const;
-type ShapeType = typeof shapeTypes[number];
-
-// Base shape props interface
-interface ShapeBaseProps {
-  left: number;
-  top: number;
-  size: number;
-  containerWidth: number;
-  containerHeight: number;
-}
-
-// Base shape styling with animation
-const Shape = styled.div<ShapeBaseProps>`
-  position: absolute;
-  border: 2px solid rgb(33, 223, 230);
-  background: transparent;
-  opacity: 0.9;
-
-  ${({ left, top, size, containerWidth, containerHeight }) => css`
-    width: ${size}px;
-    height: ${size}px;
-    left: ${left}px;
-    top: ${top}px;
-    animation: ${shrinkAndMove(left, top, containerWidth, containerHeight)} 2s linear forwards;
-  `}
-`;
-
-const Circle = styled(Shape)`
-  border-radius: 50%;
-`;
-
-const Triangle = styled(Shape)`
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  width: ${props => props.size * 1.2}px;
-  height: ${props => props.size * 1.2}px;
-`;
-
-const Square = styled(Shape)`
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-`;
-
-const Cross = styled(Shape)`
-  clip-path: polygon(
-    40% 0%, 60% 0%, 60% 40%, 100% 40%, 100% 60%, 60% 60%, 60% 100%, 40% 100%, 40% 60%, 0% 60%, 0% 40%, 40% 40%
-  );
-  transform: rotate(45deg) scale(1.2);
 `;
 
 // Styling for the gradient text (title)
@@ -217,15 +167,8 @@ const ResumeButton = styled.a`
   }
 `;
 
-// Interface for shape properties
-interface ShapeProps extends ShapeBaseProps {
-  id: string;
-  type: ShapeType;
-}
-
 // Main Hero component
 const Hero: React.FC = () => {
-  const [shapes, setShapes] = useState<ShapeProps[]>([]);
   const [topLine, setTopLine] = useState('');
   const [currentText, setCurrentText] = useState('');
   const rightContainerRef = useRef<HTMLDivElement>(null);
@@ -238,10 +181,9 @@ const Hero: React.FC = () => {
     "Greetings! I'm thrilled to have you here.",
     "This is the part where you scroll down and everything starts making sense.",
     "It's dangerous to go alone! Take this portfolio.",
-    "I build things that see, think, and move — and they’re all right here!",
+    "I build things that see, think, and move — and they're all right here!",
     "It started with a passion for learning. It led here. Dive in.",
     "One portfolio to rule them all.",
-
   ]; // Array of possible headline texts
 
   const typewriterTexts = [
@@ -300,50 +242,6 @@ const Hero: React.FC = () => {
     typeWriter(); // Invoke the typewriter function on component mount
   }, []);
 
-  useEffect(() => {
-    // Create new shapes every 200 milliseconds for the hero animation
-    const interval = setInterval(() => {
-      if (rightContainerRef.current) {
-        const containerWidth = rightContainerRef.current.clientWidth;
-        const containerHeight = rightContainerRef.current.clientHeight;
-
-        const newShapes: ShapeProps[] = Array.from({ length: 6 }).map(() => {
-          const isVerticalEdge = Math.random() > 0.5;
-          const left = isVerticalEdge 
-            ? (Math.random() > 0.5 ? 0 : containerWidth - 10)
-            : Math.random() * containerWidth;
-
-          const top = !isVerticalEdge 
-            ? (Math.random() > 0.5 ? 0 : containerHeight - 10)
-            : Math.random() * containerHeight;
-
-          const randomType = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
-
-          return {
-            id: `${Date.now()}-${Math.random()}`,
-            type: randomType,
-            left,
-            top,
-            size: Math.random() * 20 + 10,
-            containerWidth,
-            containerHeight,
-          };
-        });
-
-        setShapes(prevShapes => [...prevShapes, ...newShapes]);
-
-        // Remove shapes after animation completes
-        setTimeout(() => {
-          setShapes(prevShapes =>
-            prevShapes.filter(shape => !newShapes.some(newShape => newShape.id === shape.id))
-          );
-        }, 1500);
-      }
-    }, 200);
-
-    return () => clearInterval(interval);
-  }, [rightContainerRef]);
-
   return (
     <HeroContainer>
       <LeftContainer>
@@ -363,21 +261,7 @@ const Hero: React.FC = () => {
         </ResumeButton>
       </LeftContainer>
       <RightContainer ref={rightContainerRef}>
-        <HeroImage src={Thirdeye} alt="Hero Animation" />
-        {shapes.map(shape => {
-          switch (shape.type) {
-            case 'circle':
-              return <Circle key={shape.id} {...shape} />;
-            case 'triangle':
-              return <Triangle key={shape.id} {...shape} />;
-            case 'square':
-              return <Square key={shape.id} {...shape} />;
-            case 'cross':
-              return <Cross key={shape.id} {...shape} />;
-            default:
-              return null;
-          }
-        })}
+        <ParticleSphere />
       </RightContainer>
     </HeroContainer>
   );
