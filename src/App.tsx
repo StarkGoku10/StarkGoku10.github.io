@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { HashRouter as Router } from 'react-router-dom';
 
@@ -30,7 +30,52 @@ const AppContainer = styled.div`
 const MainContent = styled.div`
 `;
 
+const VersionTag = styled.div<{ isVisible: boolean }>`
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background: linear-gradient(45deg, #01AFAF,rgb(52, 187, 187));
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-family: 'RobotoMono', sans-serif;
+  font-size: 0.8em;
+  font-weight: bold;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  
+  opacity: ${props => (props.isVisible ? 1 : 0)};
+  transform: ${props => (props.isVisible ? 'scale(1)' : 'scale(0)')};
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: ${props => (props.isVisible ? 'auto' : 'none')};
+
+  &:hover {
+    transform: ${props => (props.isVisible ? 'scale(1.1)' : 'scale(0)')};
+  }
+`;
+
 const App: React.FC = () => {
+  const [isVersionTagVisible, setIsVersionTagVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const socialLinksElement = document.getElementById('social-links');
+      if (socialLinksElement) {
+        const rect = socialLinksElement.getBoundingClientRect();
+        // Show the tag only when the social links section is in the viewport
+        const isInViewport = rect.top < window.innerHeight && rect.bottom >= 0;
+        setIsVersionTagVisible(isInViewport);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Run on initial load
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Router>
       <AppContainer>
@@ -51,6 +96,7 @@ const App: React.FC = () => {
           <SocialLinks />
         </MainContent>
         <Footer />
+        <VersionTag isVisible={isVersionTagVisible}>v 2.0</VersionTag>
       </AppContainer>
     </Router>
   );

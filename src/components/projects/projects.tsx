@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaGithub, FaGlobe } from 'react-icons/fa';
+import { FaRepeat } from 'react-icons/fa6';
+import { PiCubeFocusFill } from 'react-icons/pi';
 import { SiPython, SiPytorch, SiHuggingface, SiGooglegemini, SiOpencv, SiOpenai, SiNumpy, SiScipy,
-  SiTensorflow, SiKeras, SiScikitlearn, SiOnnx, SiFlask } from 'react-icons/si';
+  SiTensorflow, SiKeras, SiScikitlearn, SiOnnx, SiFlask, SiMeta } from 'react-icons/si';
 
 // Importing assets for project GIFs
 import mllmtcGif from '../../assets/projects/MLLMTC.gif';
@@ -10,6 +12,7 @@ import sfmGif from '../../assets/projects/Sfm.gif';
 import homographyGif from '../../assets/projects/homography.gif';
 import pbliteGif from '../../assets/projects/pblite.gif'; 
 import portfolioGif from '../../assets/projects/portfolio.gif';
+import touch3dGif from '../../assets/projects/touch3d.gif';
 
 // Main container for all projects, handles layout and styling
 const ProjectsContainer = styled.div`
@@ -63,6 +66,11 @@ const ProjectContainer = styled.div`
     left: 0;
     z-index: 0; /* Place the image or video behind text */
     opacity: 0.3; /* Semi-transparent to not overpower the text */
+  }
+
+  /* Target the specific GIF to adjust its position */
+  .mllm-gif {
+    object-position: center 68%; /* Adjusts the vertical focus up from the bottom */
   }
 
   /* Style for project titles */
@@ -260,7 +268,43 @@ const Projects: React.FC = () => {
       <SectionTitle>Projects</SectionTitle>
       <BigProjectsContainer>
         <ProjectContainer>
-          <img src={mllmtcGif} alt="MLLM-TC" />
+          <img src={touch3dGif} alt="Touch-3D" />
+          <h3>Touch3D: Tactile-Based 3D Object Reconstruction using Deep Reinforcement Learning</h3>
+          <p>An active tactile exploration method driven by Reinforcement Learning for object 3D reconstruction using a tactile sensor. </p>
+          <TechStackContainer>
+            <TechStackItem>
+              <SiPython />
+              <span>Python</span>
+            </TechStackItem>
+            <TechStackItem>
+              <SiPytorch />
+              <span>PyTorch</span>
+            </TechStackItem>
+            <TechStackItem>
+              <FaRepeat />
+              <span>Stable-Baselines3</span>
+            </TechStackItem>
+            <TechStackItem>
+              <PiCubeFocusFill />
+              <span>Open3D</span>
+            </TechStackItem>
+            <TechStackItem>
+              <SiPython />
+              <span>PyBullet</span>
+            </TechStackItem>
+            <TechStackItem>
+              <SiMeta />
+              <span>Tacto Sensor</span>
+            </TechStackItem>
+          </TechStackContainer>
+          <div className="links">
+            <a href="https://github.com/StarkGoku10/Touch3D.git" target="_blank" rel="noopener noreferrer">
+              <FaGithub /> See on GitHub
+            </a>
+          </div>
+        </ProjectContainer>
+        <ProjectContainer>
+          <img src={mllmtcGif} alt="MLLM-TC" className="mllm-gif" />
           <h3>Evaluating Temporal Coherence in Multimodal Foundation Models for Video Understanding</h3>
           <p>A comprehensive framework for evaluating temporal coherence in multimodal foundation models,
              featuring novel metrics like CLIPGain and BERTScore, tested on benchmarks such as TOMATO and MSR-VTT.</p>
@@ -390,9 +434,9 @@ const Projects: React.FC = () => {
             <a href="https://github.com/StarkGoku10/Pb_lite_Edgedetection.git" target="_blank" rel="noopener noreferrer">
               <FaGithub /> See on GitHub
             </a>
-            {/* <a href="https://tjklint.github.io" onClick={handleComingSoonClick}>
-              <FaGlobe /> You're already here!
-            </a> */}
+            <a href="https://edge-detection-using-pblite.streamlit.app/" target="_blank" rel="noopener noreferrer">
+              <FaGlobe /> Try it Out
+            </a>
           </div>
         </SmallProject>
         <SmallProject>
