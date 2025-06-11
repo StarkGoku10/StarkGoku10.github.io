@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
+import { motion } from 'framer-motion';
 import ParticleSphere from '../ParticleSphere/ParticleSphere'; // Import the new component
 
 // Particle interface for 3D sphere animation
@@ -42,6 +43,10 @@ const LeftContainer = styled.div`
   padding: 40px; /* Padding around the text */
   text-align: left; /* Left-align the text */
   margin-top: -10%; /* Adjust to move text slightly up */
+
+  h1 {
+    margin-bottom: 0; /* Remove default bottom margin from h1 */
+  }
 
   @media (max-width: 768px) {
     padding-top: 0; /* Remove padding for smaller screens */
@@ -90,12 +95,36 @@ const floatAnimation = keyframes`
 
 // Styling for the gradient text (title)
 const GradientText = styled.h2`
-  background: linear-gradient(90deg,rgb(17, 206, 206),rgb(110, 255, 255)); /* cyan gradient */
+  background: 
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.9) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ) -200% 0 / 200% 100%,
+    rgb(33, 223, 230); /* Base color is now a solid cyan */
+  
+  background-repeat: no-repeat;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
   font-size: 4em;
   font-weight: bold;
-  margin: 0.5em 0;
+  margin: 0.2em 0 0.5em;
+
+  &:hover {
+    animation: shine 4s linear infinite;
+  }
+
+  @keyframes shine {
+    from {
+      background-position: 200% 0, 0 0;
+    }
+    to {
+      background-position: -200% 0, 0 0;
+    }
+  }
 `;
 
 // Styling for the job seeking text
@@ -104,6 +133,10 @@ const JobSeekingText = styled.div`
   font-size: 0.95em;
   margin: -1.25em 0 1em 0;
   font-weight: bold;
+`;
+
+const HighlightedText = styled.span`
+  color: rgb(33, 223, 230);
 `;
 
 // Styling for the reach out link
@@ -172,6 +205,21 @@ const Hero: React.FC = () => {
   const [topLine, setTopLine] = useState('');
   const [currentText, setCurrentText] = useState('');
   const rightContainerRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (rightContainerRef.current) {
+      const rect = rightContainerRef.current.getBoundingClientRect();
+      setMousePosition({
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top,
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setMousePosition(null);
+  };
 
   const topLines = [
     "You're finally awake. Let's explore my work.",
@@ -189,7 +237,7 @@ const Hero: React.FC = () => {
   const typewriterTexts = [
     "ML Engineer",
     "Robotics Software Engineer",
-    "Ex-MLE Intern @ techR Business Solutions ",
+    "Ex-Software Engineer @ techR Business Solutions ",
     "AI Enthusiast",
     "F1 Fanatic",
     "Part-time Body Builder",
@@ -203,14 +251,17 @@ const Hero: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Typewriter effect
+    // Set the initial static text
+    setCurrentText(typewriterTexts[0]);
+
     const typeWriter = () => {
       let i = 0;
-      let textPos = 0;
-      let currentString = typewriterTexts[i];
+      let textPos = typewriterTexts[0].length; // Start at the end of the first word
+      let currentString = typewriterTexts[0];
       const speed = 100; // Typing speed
       const deleteSpeed = 50; // Deleting speed
-      const waitTime = 2000; // Time before deleting starts
+      const initialWaitTime = 2000; // Time before deleting the first word
+      const waitTime = 2000; // Time before deleting subsequent words
 
       // Function to handle typing the text
       function type() {
@@ -236,32 +287,67 @@ const Hero: React.FC = () => {
         }
       }
 
-      type(); // Start the typewriter effect
+      // Start by deleting the first word after a delay
+      setTimeout(() => deleteText(), initialWaitTime);
     };
 
-    typeWriter(); // Invoke the typewriter function on component mount
+    const timer = setTimeout(typeWriter, 4000); // Delay the start of the entire effect
+
+    return () => clearTimeout(timer); // Cleanup timer on unmount
   }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
 
   return (
     <HeroContainer>
-      <LeftContainer>
-        <h1>{topLine}</h1>
-        <GradientText>I'm Shreyas Acharya.</GradientText>
-        <JobSeekingText>
-          Currently looking for full-time roles in Robot Computer Vision and Machine Learning starting June 2025. 
-          Please feel free to <ReachOutLink href="https://www.linkedin.com/in/shreyas-acharya-10gma/" target="_blank" rel="noopener noreferrer">reach out</ReachOutLink> if you think I'd be a good fit for your organization.
-        </JobSeekingText>
-        <TypewriterText>{currentText}</TypewriterText>
-        <ResumeButton 
-          href="/resume/resume.pdf" 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          Resume
-        </ResumeButton>
+      <LeftContainer
+        as={motion.div}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.h1 variants={itemVariants} transition={{ duration: 0.5, delay: 1.5 }}>
+          {topLine}
+        </motion.h1>
+        <motion.div variants={itemVariants} transition={{ duration: 0.8, delay: 0.5 }}>
+          <GradientText>I'm Shreyas Acharya.</GradientText>
+        </motion.div>
+        <motion.div variants={itemVariants} transition={{ duration: 0.5, delay: 1.5 }}>
+          <JobSeekingText>
+            My playground is the intersection of <HighlightedText>Language</HighlightedText>, <HighlightedText>Vision</HighlightedText>, and <HighlightedText>Action</HighlightedText>. I'm driven to build Multimodal AI Systems that can perceive and interact with the world in new ways.
+            <br /><br />
+            Actively seeking full-time roles in Software Engineering, AI and Robotics for 2025.
+            Feel free to <ReachOutLink href="https://www.linkedin.com/in/shreyas-acharya-10gma/" target="_blank" rel="noopener noreferrer">reach out</ReachOutLink> if you're looking for a passionate engineer to help build something amazing.
+          </JobSeekingText>
+        </motion.div>
+        <motion.div variants={itemVariants} transition={{ duration: 0.5, delay: 2.2 }}>
+          <TypewriterText>{currentText}</TypewriterText>
+        </motion.div>
+        <motion.div variants={itemVariants} transition={{ duration: 0.8, delay: 2.9 }}>
+          <ResumeButton href="/resume/resume.pdf" target="_blank">
+            My Resume
+          </ResumeButton>
+        </motion.div>
       </LeftContainer>
-      <RightContainer ref={rightContainerRef}>
-        <ParticleSphere />
+      <RightContainer
+        ref={rightContainerRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        <ParticleSphere mousePosition={mousePosition} />
       </RightContainer>
     </HeroContainer>
   );

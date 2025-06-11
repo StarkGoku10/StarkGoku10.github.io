@@ -268,7 +268,7 @@ const Projects: React.FC = () => {
       <SectionTitle>Projects</SectionTitle>
       <BigProjectsContainer>
         <ProjectContainer>
-          <img src={touch3dGif} alt="Touch-3D" />
+          <img src={touch3dGif} alt="Touch-3D" loading="lazy" />
           <h3>Touch3D: Tactile-Based 3D Object Reconstruction using Deep Reinforcement Learning</h3>
           <p>An active tactile exploration method driven by Reinforcement Learning for object 3D reconstruction using a tactile sensor. </p>
           <TechStackContainer>
@@ -304,7 +304,7 @@ const Projects: React.FC = () => {
           </div>
         </ProjectContainer>
         <ProjectContainer>
-          <img src={mllmtcGif} alt="MLLM-TC" className="mllm-gif" />
+          <img src={mllmtcGif} alt="MLLM-TC" className="mllm-gif" loading="lazy" />
           <h3>Evaluating Temporal Coherence in Multimodal Foundation Models for Video Understanding</h3>
           <p>A comprehensive framework for evaluating temporal coherence in multimodal foundation models,
              featuring novel metrics like CLIPGain and BERTScore, tested on benchmarks such as TOMATO and MSR-VTT.</p>
@@ -340,7 +340,7 @@ const Projects: React.FC = () => {
           </div>
         </ProjectContainer>
         <ProjectContainer>
-          <img src={sfmGif} alt="Structure from Motion Project" />
+          <img src={sfmGif} alt="Structure from Motion Project" loading="lazy" />
           <h3> Multiview structure from motion</h3>
           <p>A comprehensive pipeline designed to resonctruct 3D point clouds from a set of continuous images of a scene featuring 
             fundamental concepts like feature matching, triangulation, and bundle adjustment.
@@ -373,7 +373,7 @@ const Projects: React.FC = () => {
 
       <SmallProjectsContainer>
         <SmallProject>
-          <img src={homographyGif} alt="Homography-Net Project" />
+          <img src={homographyGif} alt="Homography-Net Project" loading="lazy" />
           <h3>Homography-Net: A Deep Learning Approach to Homography Estimation</h3>
           <p>A deep learning model for estimating homography matrices from a pair of images, 
             featuring a synthetic panorama stitching pipeline and custom deep learning architecture
@@ -407,7 +407,7 @@ const Projects: React.FC = () => {
           </div>
         </SmallProject>
         <SmallProject>
-          <img src={pbliteGif} alt="Pb-lite Edge Detection" />
+          <img src={pbliteGif} alt="Pb-lite Edge Detection" loading="lazy" />
           <h3>Pb-Lite Edge Detection</h3>
           <p>An efficient edge detection framework inspired by advanced contour detection techniques. It finds boundaries by examining 
             brightness, color, and texture information across multiple scales
@@ -440,7 +440,7 @@ const Projects: React.FC = () => {
           </div>
         </SmallProject>
         <SmallProject>
-          <img src={portfolioGif} alt="Portfolio" />
+          <img src={portfolioGif} alt="Portfolio" loading="lazy" />
           <h3>More Projects Coming Soon...</h3>
           <p>Stay tuned!</p>
           <div className="links">

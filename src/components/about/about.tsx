@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './about.scss';
+import { motion } from 'framer-motion';
 
 
 import shreyas1 from '../../assets/me/webp/shreyas1.webp';
@@ -17,7 +18,14 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <div className="about-container" id="about">
+    <motion.div
+      className="about-container"
+      id="about"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       <section className="about-intro">
         <div className="about-text">
         <h2 className="about-title">About Me</h2>
@@ -45,12 +53,12 @@ const About: React.FC = () => {
           </p>
         </div>
         <div className="about-photo">
-          <img src={photo} alt="Shreyas Acharya" />
+          <img src={photo} alt="Shreyas Acharya" loading="lazy" />
         </div>
       </section>
 
       
-    </div>
+    </motion.div>
   );
 }
 

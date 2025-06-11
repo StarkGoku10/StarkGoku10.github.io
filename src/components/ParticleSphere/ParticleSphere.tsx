@@ -14,7 +14,7 @@ interface Particle {
   x: number;
   y: number;
   z: number;
-  state: 'sphere' | 'leaking';
+  state: 'forming' | 'sphere' | 'leaking';
 
   // Velocity (primarily for 'leaking' state)
   vx: number;
@@ -36,12 +36,24 @@ interface Particle {
   theta: number; // Y-axis rotation angle
   phi: number;   // Angle from the pole (for positioning on sphere)
   sphereRadius: number; // Distance from center
+  targetSphereRadius: number; // The final radius it should have
+
+  // For mouse interaction
+  offsetX: number;
+  offsetY: number;
+  offsetZ: number;
 }
 
-const ParticleSphere: React.FC = () => {
+interface ParticleSphereProps {
+  mousePosition: { x: number; y: number } | null;
+}
+
+const ParticleSphere: React.FC<ParticleSphereProps> = ({ mousePosition }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationTimeRef = useRef<number>(0);
   const particlesRef = useRef<Particle[]>([]);
+  const mousePositionRef = useRef<{ x: number; y: number } | null>(null);
+  const formationStartTimeRef = useRef<number | null>(null);
 
   // --- Measured & Tuned Parameters from GIF Analysis ---
   const PARTICLE_COUNT = 2400;
@@ -50,6 +62,13 @@ const ParticleSphere: React.FC = () => {
   // Sphere Physics
   const ROTATION_SPEED = 0.05;
   const BROWNIAN_MOTION = 0.15; // "Boiling" effect on sphere surface
+  const FORMATION_DURATION = 2500; // in milliseconds
+  const FORMATION_DELAY = 3200; // Delay before the sphere starts forming (matches resume button)
+
+  // Mouse Interaction
+  const MOUSE_REPEL_RADIUS = 100;
+  const MOUSE_REPEL_STRENGTH = 1.5;
+  const OFFSET_DECAY = 0.95; // Damping factor for spring-back effect
 
   // Leaking Particle Physics
   const LEAK_PROBABILITY = 0.001;
@@ -83,7 +102,7 @@ const ParticleSphere: React.FC = () => {
   const createParticle = (index: number): Particle => {
     const theta = Math.random() * 2 * Math.PI;
     const phi = Math.acos(2 * Math.random() - 1);
-    const sphereRadius = (canvasRef.current?.width || 0) * 0.25 + (Math.random() - 0.5) * 30;
+    const finalSphereRadius = (canvasRef.current?.width || 0) * 0.25 + (Math.random() - 0.5) * 30;
     const radius = MIN_RADIUS + Math.random() * (MAX_RADIUS - MIN_RADIUS);
 
     return {
@@ -94,15 +113,24 @@ const ParticleSphere: React.FC = () => {
       growthFactor: 0, // Will be set when particle starts leaking
       opacity: 1,
       color: PARTICLE_COLOR,
-      state: 'sphere',
+      state: 'forming',
       lifespan: 0,
       maxLifespan: 0, // Will be set when particle starts leaking
       theta: theta,
       phi: phi,
-      sphereRadius: sphereRadius,
+      sphereRadius: 0, // Start at the center
+      targetSphereRadius: finalSphereRadius, // Store the final destination
+      offsetX: 0, // Initialize offsets
+      offsetY: 0,
+      offsetZ: 0,
     };
   };
   
+  useEffect(() => {
+    // Keep the ref updated with the latest mouse position prop
+    mousePositionRef.current = mousePosition;
+  }, [mousePosition]);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -126,11 +154,32 @@ const ParticleSphere: React.FC = () => {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
+      const now = performance.now();
+      if (formationStartTimeRef.current === null) {
+          formationStartTimeRef.current = now;
+      }
+      const elapsed = now - formationStartTimeRef.current - FORMATION_DELAY;
+      if (elapsed < 0) { // If we are in the delay period, do nothing
+          requestAnimationFrame(animate);
+          return;
+      }
+      
+      const formationProgress = Math.min(elapsed / FORMATION_DURATION, 1);
+      const easedProgress = 1 - Math.pow(1 - formationProgress, 3); // easeOutCubic
+
       animationTimeRef.current += 0.016; // ~60fps
       const rotation = animationTimeRef.current * ROTATION_SPEED;
       
       particlesRef.current.forEach((p, index) => {
-        if (p.state === 'sphere') {
+        if (p.state === 'forming') {
+          p.sphereRadius = p.targetSphereRadius * easedProgress;
+          if (formationProgress >= 1) {
+              p.state = 'sphere';
+              p.sphereRadius = p.targetSphereRadius; // Ensure it lands perfectly
+          }
+        }
+
+        if (p.state === 'forming' || p.state === 'sphere') {
           // Add Brownian "boiling" motion
           p.phi += (Math.random() - 0.5) * BROWNIAN_MOTION * 0.01;
           p.theta += (Math.random() - 0.5) * BROWNIAN_MOTION * 0.01;
@@ -144,8 +193,8 @@ const ParticleSphere: React.FC = () => {
           p.z = p.sphereRadius * Math.sin(p.phi) * Math.sin(rotatedTheta);
           p.opacity = 1.0;
 
-          // Probabilistically transition particle to 'leaking' state
-          if (Math.random() < LEAK_PROBABILITY) {
+          // Leaking only happens from a fully formed sphere
+          if (p.state === 'sphere' && Math.random() < LEAK_PROBABILITY) {
             p.state = 'leaking';
             
             // Assign lifespan and growth factor based on new hierarchical logic
@@ -218,10 +267,40 @@ const ParticleSphere: React.FC = () => {
           }
         }
 
-        // Project 3D particle to 2D screen
-        const scale = perspective / (perspective + p.z);
-        const screenX = centerX + p.x * scale;
-        const screenY = centerY + p.y * scale;
+        // --- Universal Logic (applies to all particles) ---
+
+        // Mouse interaction logic using the ref
+        const currentMouse = mousePositionRef.current;
+        if (currentMouse) {
+          // Project the particle's core 3D position to 2D to calculate distance from mouse
+          const scaleForInteraction = perspective / (perspective + p.z);
+          const projectedX = centerX + p.x * scaleForInteraction;
+          const projectedY = centerY + p.y * scaleForInteraction;
+          const dx = projectedX - currentMouse.x;
+          const dy = projectedY - currentMouse.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < MOUSE_REPEL_RADIUS) {
+            const force = (1 - distance / MOUSE_REPEL_RADIUS) * MOUSE_REPEL_STRENGTH;
+            const angle = Math.atan2(dy, dx);
+            p.offsetX += Math.cos(angle) * force;
+            p.offsetY += Math.sin(angle) * force;
+          }
+        }
+        
+        // Apply spring-back decay to offsets
+        p.offsetX *= OFFSET_DECAY;
+        p.offsetY *= OFFSET_DECAY;
+        p.offsetZ *= OFFSET_DECAY;
+
+        // Project 3D particle to 2D screen, including offsets
+        const finalX = p.x + p.offsetX;
+        const finalY = p.y + p.offsetY;
+        const finalZ = p.z + p.offsetZ;
+
+        const scale = perspective / (perspective + finalZ);
+        const screenX = centerX + finalX * scale;
+        const screenY = centerY + finalY * scale;
         const radius = Math.max(0, p.radius * scale);
 
         // Draw particle
