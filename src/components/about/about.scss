@@ -5,6 +5,67 @@
   color: white;
 }
 
+.about-title-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 20px;
+
+  .about-title {
+    font-size: 2.7em; /* Reduced by 20% from 3.375em */
+    margin: 0;
+    color: #fff;
+    font-family: 'Titillium', sans-serif;
+    white-space: nowrap;
+    
+    @media (max-width: 768px) {
+      font-size: 2.5em; /* Slightly smaller on mobile */
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 2em; /* Even smaller on very small screens */
+    }
+  }
+
+  .title-line {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 10px;
+
+    .line {
+      height: 2px;
+      background: linear-gradient(90deg, #10fcf0, transparent);
+      flex: 0 1 1000px; /* Increased max-width of the line */
+      min-width: 100px;
+      transform: translateY(5px);
+      transform-origin: left; /* Added for growth animation */
+    }
+
+    .dot {
+      width: 0; /* Removed dot */
+      height: 0; /* Removed dot */
+      background-color: #10fcf0;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+
+    .title-line {
+      width: 100%;
+      
+      .line {
+        min-width: 50px;
+      }
+    }
+  }
+}
+
 .cyan-text {
   color: #10fcf0; /* cyan color for highlighted text */
 }
@@ -22,7 +83,7 @@ h2 {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  margin-bottom: 40px;
+  margin-bottom: 100px;
 
   /* Vertically center the photo with text and header on desktop */
   @media (min-width: 769px) {
@@ -36,8 +97,8 @@ h2 {
   }
 
   .about-text {
-    flex: 1;
-    padding-right: 0;
+    flex: 0 1 50%; /* Further constrained text width */
+    padding-right: 5%; /* Add space between text and photo */
     text-align: left;
 
     /* Center text on mobile */
@@ -47,7 +108,7 @@ h2 {
     }
 
     p {
-      font-size: 1.2em;
+      font-size: 1.2em; /* Reverted from 1.38em */
       margin-bottom: 20px;
     }
 
@@ -67,25 +128,72 @@ h2 {
 
   .about-photo {
     flex: 0 0 30%;
-    padding-left: 5%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    /* No longer a flex container, just a positioned block */
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    /* align-items: center; */
+    max-width: 400px;
+    position: relative;
+    left: 10%;
+    padding: 0;
+
+    .photo-border {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 3px solid #03fdfd;
+      border-radius: 10px;
+      transition: transform 0.35s ease-in-out;
+      z-index: 2; // Border is on top initially
+      pointer-events: none; // So it doesn't interfere with hovering the image
+    }
 
     img {
       width: 100%;
-      height: auto;
-      border: 3px solid #03fdfd;
-      border-radius: 10px;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: center 20%;
+      border-radius: 8px;
+      position: relative;
+      z-index: 1; // Image is behind border initially
+      display: block; // Ensures no extra space around the image
+      // On hover-out, delay the z-index change until other animations finish
+      transition: transform 0.35s ease-in-out,
+                  box-shadow 0.35s ease-in-out,
+                  z-index 0s linear 0.35s;
+    }
+
+    &:hover {
+      .photo-border {
+        transform: translate(30px, 30px); // Significantly move border
+      }
+
+      img {
+        transform: scale(1.08); // Pop the image out more
+        box-shadow: 10px 10px 30px rgba(3, 253, 253, 0.4); // Cast a cyan shadow
+        z-index: 3; // Bring image to the very front
+        // On hover-in, z-index should change instantly, so remove delay
+        transition-delay: 0s;
+      }
     }
 
     /* Ensure the photo is centered horizontally and vertically on mobile */
     @media (max-width: 768px) {
       width: 70%;
-      padding-left: 0;
       margin-top: 20px;
       margin-left: auto;
       margin-right: auto;
+      justify-content: center;
+      align-items: center;
+
+      /* Reset position for mobile to allow centering */
+      position: static;
+      left: auto;
+      /* Re-apply flex centering only for mobile */
+      display: flex;
       justify-content: center;
       align-items: center;
     }
