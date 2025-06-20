@@ -4,7 +4,7 @@
   align-items: center; /* Center the content horizontally */
   color: #fff; /* White text color */
   width: 80%; /* Set container width to 80% */
-  margin: 0 auto; /* Center the container horizontally */
+  margin: 275px auto 0; /* Center the container horizontally */
   padding: 0; /* Remove padding */
   font-family: 'RobotoMono', sans-serif; /* Use the RobotoMono font */
 
@@ -58,55 +58,87 @@
 
 .section-container {
   position: relative; /* Position relative for the section */
+  margin-bottom: 150px; /* Increased space between sections */
+}
+
+.section-title-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px; /* Increased space */
+  gap: 20px;
 }
 
 .section-title {
-  font-size: 2.5em; /* Large font size for section titles */
-  margin-bottom: 20px; /* Space below the section title */
+  font-size: 2.7em; /* Match "About Me" title size */
   position: relative; /* Position relative for future positioning */
+  margin: 0;
+  color: #fff;
+  font-family: 'Titillium', sans-serif; /* Match About Me font */
+  white-space: nowrap;
+}
+
+.title-line {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 10px;
+
+  .line {
+    height: 2px;
+    background: linear-gradient(90deg, #10fcf0, transparent);
+    flex: 0 1 1000px; /* Increased max-width of the line */
+    min-width: 100px;
+    transform-origin: left; /* Default: animates left-to-right */
+
+    &.from-right {
+      transform-origin: right; /* Modifier: animates right-to-left */
+    }
+  }
 }
 
 .line-container {
   position: relative; /* Relative positioning for the line indicator */
+  padding-left: 10px; /* Space for the timeline */
 
-  &:before {
-    content: ""; /* Create a vertical line */
+  .timeline-line {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 2px; /* Set the line width */
-    background: #d3d3d3; /* Light gray color for the line */
+    left: 0;
+    width: 2px;
+    background-color: #d3d3d3;
+    transform-origin: top; /* Animation starting point */
   }
 }
 
 .job-container {
-  margin-bottom: 20px; /* Space below each job section */
+  margin-bottom: 40px; /* Space below each job section */
   padding-left: 40px; /* Space on the left to align content */
   position: relative; /* Relative positioning for the job container */
 
-  &:before {
-    content: ""; /* Create a horizontal line for job sections */
+  .timeline-tick {
     position: absolute;
-    top: 1em;
-    left: 0;
-    width: 20px; /* Set width of the horizontal line */
-    height: 2px; /* Set height of the line */
-    background: #d3d3d3; /* Light gray color for the line */
+    top: 1.3em; /* Align with text */
+    left: -10px; /* Position relative to the container's padding */
+    width: 20px;
+    height: 2px;
+    background: #d3d3d3;
+    transform-origin: left; /* Animation starting point */
   }
 }
 
 .job-title {
-  font-size: 1.5em; /* Font size for job titles */
+  font-size: 1.65em; /* Font size for job titles (increased 10%) */
   margin: 10px 0; /* Space above and below the job title */
   position: relative; /* Relative positioning for future positioning */
 }
 
 .company {
-  color: #30cae6; /* Cyan color for company names */
+  color: #10fcf0; /* Matched cyan color */
 }
 
 .job-dates {
-  font-size: 1em; /* Font size for job dates */
+  font-size: 1.1em; /* Font size for job dates (increased 10%) */
   color: #d3d3d3; /* Light gray color for job dates */
   margin: 5px 0 10px 0; /* Spacing around job dates */
 }
@@ -115,12 +147,16 @@
   list-style-type: none; /* Remove default list style */
   position: relative; /* Relative positioning for bullet points */
   padding-left: 20px; /* Space on the left for the bullet points */
-  font-size: 1em; /* Font size for the bullet points */
+  font-size: 1.1em; /* Font size for bullet points (increased 10%) */
+  max-width: 90%; /* Constrain line width for readability */
+  margin-bottom: 12px; /* Added spacing between bullet points */
 
   &:before {
-    content: ">"; /* Arrow symbol for bullet points */
+    content: "•"; /* Arrow symbol for bullet points */
     position: absolute;
     left: 0; /* Align bullet point to the left */
-    color: #51ebff; /* Cyan color for bullet point arrows */
+    color: #10fcf0; /* Matched cyan color */
+    font-size: 1.1em; /* Increased size of the bullet symbol */
+    font-weight: bold; /* Make the symbol thicker */
   }
 }

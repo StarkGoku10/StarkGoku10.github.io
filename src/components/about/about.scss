@@ -41,14 +41,6 @@
       transform: translateY(5px);
       transform-origin: left; /* Added for growth animation */
     }
-
-    .dot {
-      width: 0; /* Removed dot */
-      height: 0; /* Removed dot */
-      background-color: #10fcf0;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
   }
 
   @media (max-width: 768px) {
