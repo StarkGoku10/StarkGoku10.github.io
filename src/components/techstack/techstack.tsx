@@ -1,85 +1,144 @@
 import React from 'react';
-import { FaGithub, FaGitlab, FaDocker, FaJira, FaPython, FaJs, FaReact, FaDatabase, FaChartLine, FaLinux } from 'react-icons/fa';
-import { 
-  SiCplusplus, SiPostgresql, SiMongodb, SiMysql, SiSqlite, 
-  SiPandas, SiPytorch, SiTensorflow, SiNvidia, SiOpencv, 
-  SiVisualstudio, SiCisco, SiScikitlearn, SiWebpack, SiNumpy, 
-  SiRos, SiScipy, SiKubernetes, SiGithubactions,
-  SiDocker, SiGit, SiHuggingface
-} from 'react-icons/si';
+import { motion } from 'framer-motion';
+import { FaGithub, FaGitlab, FaDocker, FaPython, FaJs, FaReact, FaDatabase, FaChartLine, FaLinux, FaMobileAlt } from 'react-icons/fa';
+import { SiCplusplus, SiPostgresql, SiMysql, SiSqlite, SiPandas, SiPytorch, SiTensorflow, SiNvidia, SiOpencv, SiVisualstudio, SiScikitlearn, 
+  SiWebpack, SiNumpy, SiRos, SiScipy, SiKubernetes, SiGithubactions, SiGit, SiHuggingface, SiFlask, SiFastapi, SiGoogle} from 'react-icons/si'; 
 import './techstack.scss';
+
+const technologies = [
+    // Languages
+    { name: 'Python', icon: <FaPython />, category: 'Languages' },
+    { name: 'C++', icon: <SiCplusplus />, category: 'Languages' },
+    { name: 'SQL', icon: <FaDatabase />, category: 'Languages' },
+    { name: 'MySQL', icon: <SiMysql />, category: 'Languages' },
+    { name: 'SQLite', icon: <SiSqlite />, category: 'Languages' },
+    { name: 'PostgreSQL', icon: <SiPostgresql />, category: 'Languages' },
+    { name: 'JavaScript', icon: <FaJs />, category: 'Languages' },
+    { name: 'MATLAB', icon: <FaChartLine />, category: 'Languages' },
+    // Frameworks
+    { name: 'PyTorch', icon: <SiPytorch />, category: 'Frameworks' },
+    { name: 'Tensorflow', icon: <SiTensorflow />, category: 'Frameworks' },
+    { name: 'ROS2', icon: <SiRos />, category: 'Frameworks' },
+    { name: 'MoveIt', icon: <SiRos />, category: 'Frameworks' },
+    { name: 'CUDA', icon: <SiNvidia />, category: 'Frameworks' },
+    { name: 'RESTful API', icon: <SiWebpack />, category: 'Frameworks' },
+    { name: 'LangChain', icon: <SiHuggingface />, category: 'Frameworks' },
+    { name: 'React', icon: <FaReact />, category: 'Frameworks' },
+    { name: 'Kivy', icon: <FaMobileAlt />, category: 'Frameworks' },
+    { name: 'Flask', icon: <SiFlask />, category: 'Frameworks' },
+    { name: 'FastAPI', icon: <SiFastapi />, category: 'Frameworks' },
+    { name: 'GANs/Diffusion', icon: <SiPytorch />, category: 'Frameworks' },
+    { name: 'Mujoco', icon: <SiGoogle />, category: 'Frameworks' },
+    // Developer Tools
+    { name: 'GitHub', icon: <FaGithub />, category: 'Developer Tools' },
+    { name: 'GitLab', icon: <FaGitlab />, category: 'Developer Tools' },
+    { name: 'Docker', icon: <FaDocker />, category: 'Developer Tools' },
+    { name: 'Visual Studio', icon: <SiVisualstudio />, category: 'Developer Tools' },
+    { name: 'Linux', icon: <FaLinux />, category: 'Developer Tools' },
+    { name: 'Git', icon: <SiGit />, category: 'Developer Tools' },
+    { name: 'Kubernetes', icon: <SiKubernetes />, category: 'Developer Tools' },
+    { name: 'GitHub Actions', icon: <SiGithubactions />, category: 'Developer Tools' },
+    { name: 'CI/CD Pipeline', icon: <SiGithubactions />, category: 'Developer Tools' },
+    { name: 'UML', icon: <SiVisualstudio />, category: 'Developer Tools' },
+    { name: 'Gazebo', icon: <SiRos />, category: 'Developer Tools' },
+    { name: 'SolidWorks', icon: <SiVisualstudio />, category: 'Developer Tools' },
+    { name: 'Agile', icon: <SiWebpack />, category: 'Developer Tools' },
+    { name: 'Software Design', icon: <SiWebpack />, category: 'Developer Tools' },
+    // Libraries
+    { name: 'PyGame', icon: <FaPython />, category: 'Libraries' },
+    { name: 'OpenCV', icon: <SiOpencv />, category: 'Libraries' },
+    { name: 'Scikit-learn', icon: <SiScikitlearn />, category: 'Libraries' },
+    { name: 'NumPy', icon: <SiNumpy />, category: 'Libraries' },
+    { name: 'Pandas', icon: <SiPandas />, category: 'Libraries' },
+    { name: 'Matplotlib', icon: <SiScipy />, category: 'Libraries' },
+    { name: 'SciPy', icon: <SiScipy />, category: 'Libraries' },
+    { name: 'Hugging Face', icon: <SiHuggingface />, category: 'Libraries' },
+    { name: 'stable-Baseline3', icon: <SiPytorch />, category: 'Libraries' },
+    { name: 'PyBullet', icon: <SiPytorch />, category: 'Libraries' },
+];
+
+const categories = ["Languages", "Frameworks", "Developer Tools", "Libraries"];
+
+// Animation variants updated to match About Me section timings for title and line
+const titleVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut", delay: 0.2 } },
+};
+  
+const lineVariants = {
+    hidden: { scaleX: 0 },
+    visible: { scaleX: 1, transition: { duration: 0.8, ease: "easeOut", delay: 0.7 } },
+};
+
+const categoriesContainerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            delayChildren: 1.5, // Adjusted delay to follow line animation
+            staggerChildren: 0.5,
+        }
+    }
+}
+
+const categoryTileVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+        duration: 0.8,
+        ease: "easeOut",
+    },
+  },
+};
+
+const itemsContainerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            delayChildren: 0.5,
+            staggerChildren: 0.08,
+        }
+    }
+}
+
+const techItemVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
+}
 
 const Techstack: React.FC = () => {
   return (
-    <div className="about-technologies-container">
+    <motion.div 
+        className="about-technologies-container"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+    >
       <section className="about-technologies">
-        <h2>My Techstack</h2>
-        <div className="technology-categories">
-          <div className="technology-category">
-            <h3>Languages</h3>
-            <div className="technology-items">
-              <div className="technology-item"><FaPython /><p>Python</p></div>
-              <div className="technology-item"><SiCplusplus /><p>C++</p></div>
-              <div className="technology-item"><FaDatabase /><p>SQL</p></div>
-              <div className="technology-item"><SiMysql /><p>MySQL</p></div>
-              <div className="technology-item"><SiSqlite /><p>SQLite</p></div>
-              <div className="technology-item"><SiPostgresql /><p>PostgreSQL</p></div>
-              <div className="technology-item"><FaJs /><p>JavaScript</p></div>
-              <div className="technology-item"><FaChartLine /><p>MATLAB</p></div>
-            </div>
+        <motion.div className="title-container" variants={titleVariants}>
+          <h2 className="techstack-title">My Techstack</h2>
+          <div className="title-line-container">
+            <motion.div className="title-line" variants={lineVariants} style={{ transformOrigin: 'left' }}/>
           </div>
-
-          <div className="technology-category">
-            <h3>Frameworks</h3>
-            <div className="technology-items">
-              <div className="technology-item"><SiPytorch /><p>PyTorch</p></div>
-              <div className="technology-item"><SiTensorflow /><p>Tensorflow</p></div>
-              <div className="technology-item"><SiRos /><p>ROS2</p></div>
-              <div className="technology-item"><SiRos /><p>Gazebo</p></div>
-              <div className="technology-item"><SiRos /><p>MoveIt</p></div>
-              <div className="technology-item"><SiNvidia /><p>CUDA</p></div>
-              <div className="technology-item"><SiWebpack /><p>RESTful API</p></div>
-              <div className="technology-item"><SiHuggingface /><p>LangChain</p></div>
-            </div>
-          </div>
-
-          <div className="technology-category">
-            <h3>Developer Tools</h3>
-            <div className="technology-items">
-              <div className="technology-item"><FaGithub /><p>GitHub</p></div>
-              <div className="technology-item"><FaGitlab /><p>GitLab</p></div>
-              <div className="technology-item"><FaDocker /><p>Docker</p></div>
-              <div className="technology-item"><SiVisualstudio /><p>Visual Studio</p></div>
-              <div className="technology-item"><FaLinux /><p>Linux</p></div>
-              <div className="technology-item"><SiGit /><p>Git</p></div>
-              <div className="technology-item"><SiKubernetes /><p>Kubernetes</p></div>
-              <div className="technology-item"><SiGithubactions /><p>GitHub Actions</p></div>
-              <div className="technology-item"><SiGithubactions /><p>CI/CD Pipeline</p></div>
-              <div className="technology-item"><SiVisualstudio /><p>UML</p></div>
-              <div className="technology-item"><SiVisualstudio /><p>SolidWorks</p></div>
-              <div className="technology-item"><SiWebpack /><p>Agile</p></div>
-              <div className="technology-item"><SiWebpack /><p>Software Architecture</p></div>
-            </div>
-          </div>
-
-          <div className="technology-category">
-            <h3>Libraries</h3>
-            <div className="technology-items">
-              <div className="technology-item"><FaPython /><p>PyGame</p></div>
-              <div className="technology-item"><SiOpencv /><p>OpenCV</p></div>
-              <div className="technology-item"><SiScikitlearn /><p>Scikit-learn</p></div>
-              <div className="technology-item"><SiNumpy /><p>NumPy</p></div>
-              <div className="technology-item"><SiPandas /><p>Pandas</p></div>
-              <div className="technology-item"><SiScipy /><p>Matplotlib</p></div>
-              <div className="technology-item"><SiScipy /><p>SciPy</p></div>
-              <div className="technology-item"><SiHuggingface /><p>Hugging Face</p></div>
-              <div className="technology-item"><SiPytorch /><p>stable-Baseline3</p></div>
-              <div className="technology-item"><SiPytorch /><p>PyBullet</p></div>
-            </div>
-          </div>
-        </div>
+        </motion.div>
+        <motion.div className="technology-categories" variants={categoriesContainerVariants}>
+          {categories.map((category) => (
+            <motion.div className="technology-category" key={category} variants={categoryTileVariants}>
+              <h3>{category}</h3>
+              <motion.div className="technology-items" variants={itemsContainerVariants}>
+                {technologies.filter((tech) => tech.category === category).map((tech) => (
+                    <motion.div className="technology-item" key={tech.name} variants={techItemVariants}>
+                      <div className="icon">{tech.icon}</div>
+                      <p>{tech.name}</p>
+                    </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
       </section>
-    </div>
+    </motion.div>
   );
 }
 

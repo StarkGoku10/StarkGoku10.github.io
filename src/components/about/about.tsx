@@ -98,7 +98,7 @@ const About: React.FC = () => {
             to detect and classify distinct human actions for custom warehouse security with over <span className="cyan-text">85%% accuracy</span>.
           </motion.p>
           <motion.p variants={textChildVariants}>
-           Outside of tech, I stay active by <span className="cyan-text">playing football</span> and <span className="cyan-text">working out</span>.
+           Outside of tech, I stay active by <span className="cyan-text">playing football</span> and <span className="cyan-text">working out</span>. 
            I'm also a huge fan of <span className="cyan-text">Motorsport</span>, particularly <span className="cyan-text">Formula 1</span>, often known as <span className="cyan-text">the Pinnacle of Motorsport</span>.
            I also unwind by listening to <span className="cyan-text">music</span> or watching <span className="cyan-text">movies</span> with friends
            or playing <span className="cyan-text">Open-world games</span>.

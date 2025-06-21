@@ -1,16 +1,39 @@
 .about-technologies-container {
   width: 80%; /* Set width to 80% for consistent margin with other components */
   margin: 0 auto; /* Center the container horizontally */
-  padding: 20px 0; /* Padding around the container */
-  font-family: 'Titillium', sans-serif;
+  padding: 200px 0; /* Padding around the container */
+  font-family: 'Inter', sans-serif;
   color: #fff; /* White text color */
 
   .about-technologies {
-    h2 {
-      font-size: 2em; /* Large font size for section title */
-      margin-bottom: 20px; /* Space below the title */
-      text-align: left; /* Align title to the left */
-      color: #fff; /* White title */
+    .title-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+
+      .techstack-title {
+        font-size: 2.7rem;
+        font-weight: bold;
+        margin: 0;
+        padding-right: 20px;
+        color: #fff;
+      }
+
+      .title-line-container {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        gap: 10px;
+
+        .title-line {
+          height: 2px;
+          background: linear-gradient(90deg, #10fcf0, transparent);
+          flex: 0 1 1000px;
+          min-width: 100px;
+          transform-origin: left;
+        }
+
+      }
     }
 
     .technology-categories {
@@ -28,13 +51,20 @@
 
       .technology-category {
         background-color: #2a2a2a; /* Dark background for each category */
-        padding: 20px; /* Padding inside each category box */
+        padding: 15px; /* Padding inside each category box */
         border-radius: 10px; /* Rounded corners */
         color: #fff; /* White text color */
+        transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+          transform: translateY(5px) scale(1.02);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(1, 175, 175, 0.3);
+        }
 
         h3 {
-          font-size: 1.5em; /* Font size for category headings */
-          margin-bottom: 30px; /* Space below the category title */
+          font-size: 1.8em; /* Increased font size for category headings */
+          margin-bottom: 15px; /* Space below the category title */
           text-align: center; /* Center-align category titles */
           color: #fff; /* White color for category titles */
         }
@@ -56,7 +86,7 @@
             display: flex;
             flex-direction: column; /* Stack icon and text vertically */
             align-items: center; /* Center-align items */
-            font-size: 1.2em; /* Font size for text inside technology items */
+            font-size: 1.1em; /* Reduced font size for text inside technology items */
             color: #fff; /* White text color */
             transition: color 0.3s ease; /* Smooth color transition on hover */
             cursor: default; /* Keep cursor default, not clickable */
@@ -76,7 +106,7 @@
             }
 
             &:hover {
-              color: #01AFAF; /* Change color to purple on hover */
+              color: #10fcf0; /* Change color to cyan on hover */
             }
           }
         }

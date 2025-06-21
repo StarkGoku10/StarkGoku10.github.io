@@ -19,15 +19,15 @@ const HoverText = styled.span`
   transition: color 0.3s ease;
   cursor: pointer;
 
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
     background-color: #10fcf0;
-    transform: scaleX(0);
+      transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease-out;
   }
@@ -193,29 +193,29 @@ const Resume: React.FC = () => {
                 {/* Education Entry 1 */}
                 <motion.div className="job-container" variants={jobContentVariants}>
                   <motion.div className="timeline-tick" variants={timelineTickVariants} />
-                  <h3 className="job-title">
+                <h3 className="job-title">
                     <HoverText>Master of Engineering in Robotics</HoverText> <span className="company">@ University of Maryland, College Park</span>
-                  </h3>
-                  <p className="job-dates">August 2023 - May 2025</p>
-                  <ul>
-                    <li className="bullet-point">
-                      Relevant Courses: Multimodal Foundation Models, Computer Processing of Pictoral information, Perception of Autonomous Robots, Planning of Automonous Robots, 
-                      Software Design and Implementation, Robot Learning 
-                    </li>
-                  </ul>
+                </h3>
+                <p className="job-dates">August 2023 - May 2025</p>
+                <ul>
+                  <li className="bullet-point">
+                    Relevant Courses: Multimodal Foundation Models, Computer Processing of Pictoral information, Perception of Autonomous Robots, Planning of Automonous Robots, 
+                    Software Design and Implementation, Robot Learning 
+                  </li>
+                </ul>
                 </motion.div>
                 {/* Education Entry 2 */}
                 <motion.div className="job-container" variants={jobContentVariants}>
                   <motion.div className="timeline-tick" variants={timelineTickVariants} />
-                  <h3 className="job-title">
+                <h3 className="job-title">
                     <HoverText>Bachelor of Engineering in Computer Engineering</HoverText> <span className="company">@ Savitribai Phule Pune University</span>
-                  </h3>
-                  <p className="job-dates">August 2019 - May 2023</p>
-                  <ul>
-                    <li className="bullet-point">
-                      Relevant Courses: Data Structures and Algorithms, Machine Learning, Artificial Intelligence, Database Management Systems, Deep learning
-                    </li>
-                  </ul>
+                </h3>
+                <p className="job-dates">August 2019 - May 2023</p>
+                <ul>
+                  <li className="bullet-point">
+                    Relevant Courses: Data Structures and Algorithms, Machine Learning, Artificial Intelligence, Database Management Systems, Deep learning
+                  </li>
+                </ul>
                 </motion.div>
               </motion.div>
             </div>
