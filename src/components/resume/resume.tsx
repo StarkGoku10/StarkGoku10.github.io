@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { motion, useInView } from 'framer-motion';
 import './resume.scss';
 

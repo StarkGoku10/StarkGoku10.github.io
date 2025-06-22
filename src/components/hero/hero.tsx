@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import ParticleSphere from '../ParticleSphere/ParticleSphere'; // Import the new component
 
