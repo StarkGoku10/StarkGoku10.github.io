@@ -130,7 +130,7 @@ const GradientText = styled.h2`
 // Styling for the job seeking text
 const JobSeekingText = styled.div`
   color: #fff;
-  font-size: 0.95em;
+  font-size: 0.96em;
   margin: -1.25em 0 1em 0;
   font-weight: bold;
 `;
@@ -196,7 +196,7 @@ const ResumeButton = styled.a`
   &:hover {
     background: rgba(33, 223, 230, 0.1);
     box-shadow: 0 0 10px rgba(33, 223, 230, 0.5);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
   }
 `;
 
@@ -235,12 +235,12 @@ const Hero: React.FC = () => {
   ]; // Array of possible headline texts
 
   const typewriterTexts = [
-    "ML Engineer",
-    "Robotics Software Engineer",
+    "Software Engineer",
+    "Machine Learning Engineer",
     "Ex-Software Engineer @ techR Business Solutions ",
     "AI Enthusiast",
     "F1 Fanatic",
-    "Part-time Body Builder",
+    "Part-time Athlete",
     "Gamer",
     "Home Chef",
   ]; // Array of texts for the typewriter effect

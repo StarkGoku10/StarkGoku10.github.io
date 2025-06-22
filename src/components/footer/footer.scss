@@ -33,9 +33,16 @@
   }
 
   .footer-link {
-    color: #17b0d6; /* cyan color for footer links */
-    text-decoration: underline; /* Underline links */
+    color: #10fcf0; /* Standard cyan for the link */
+    text-decoration: none;
+    display: inline-block; /* Allow the element to be transformed */
     margin-left: 5px; /* Small left margin to separate from text */
+    transition: color 0.3s, transform 0.3s;
+
+    &:hover {
+      color: #10fcf0;
+      transform: scale(1.2);
+    }
   }
 
   .social-icons {
@@ -51,10 +58,11 @@
     a {
       color: #d3d3d3; /* Light grey for social icons */
       font-size: 1.5em; /* Size of social icons */
-      transition: color 0.3s; /* Smooth transition for hover effect */
+      transition: color 0.3s, transform 0.3s;
 
       &:hover {
-        color: #119dc0; /* Change icon color to purple on hover */
+        color: #10fcf0; /* Standard cyan on hover */
+        transform: scale(1.2);
       }
     }
   }
@@ -76,7 +84,7 @@
   .center-align {
     text-align: center; /* Center text */
     p {
-      color: #119dc0; /* Cyan color for copyright text */
+      color: #10fcf0; /* Cyan color for copyright text */
     }
   }
 

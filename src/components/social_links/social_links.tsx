@@ -37,7 +37,7 @@ const SocialDescription = styled.p`
   margin-bottom: 20px; /* Space below the description */
 
   .highlight {
-    color: #10fcf0; /* Highlighted purple color for important words */
+    color: #10fcf0; /* Highlighted cyan color for important words */
   }
 `;
 
@@ -50,12 +50,6 @@ const SocialIcons = styled.div`
   a {
     color: #d3d3d3; /* Default icon color (light gray) */
     font-size: 2em; /* Size of the icons */
-    transition: color 0.3s, transform 0.3s; /* Smooth color transition on hover */
-
-    &:hover {
-      color: #10fcf0; /* Change icon color to purple on hover */
-      transform: scale(1.2); /* Add pop-up effect on hover */
-    }
   }
 `;
 
@@ -115,11 +109,11 @@ const SocialLinks: React.FC = () => {
         <motion.div variants={iconContainerVariants}>
           <SocialIcons>
             {/* Social media links with icons */}
-            <motion.a href="https://www.linkedin.com/in/shreyas-acharya-10gma/" target="_blank" rel="noopener noreferrer" variants={iconVariants}><FaLinkedin /></motion.a>
-            <motion.a href="https://github.com/StarkGoku10" target="_blank" rel="noopener noreferrer" variants={iconVariants}><FaGithub /></motion.a>
-            <motion.a href="https://mail.google.com/mail/?view=cm&fs=1&to=shreyasacharya3000@gmail.com" target="_blank" rel="noopener noreferrer" variants={iconVariants}><SiGmail /></motion.a>
-            <motion.a href="https://medium.com/@shreyasacharya3000" target="_blank" rel="noopener noreferrer" variants={iconVariants}><FaMedium /></motion.a>
-            <motion.a href="/resume/resume.pdf" target="_blank" rel="noopener noreferrer" variants={iconVariants}><FaFileAlt /></motion.a>
+            <motion.a href="https://www.linkedin.com/in/shreyas-acharya-10gma/" target="_blank" rel="noopener noreferrer" variants={iconVariants} whileHover={{ scale: 1.1, color: '#10fcf0' }} transition={{ duration: 0.2 }}><FaLinkedin /></motion.a>
+            <motion.a href="https://github.com/StarkGoku10" target="_blank" rel="noopener noreferrer" variants={iconVariants} whileHover={{ scale: 1.1, color: '#10fcf0' }} transition={{ duration: 0.2 }}><FaGithub /></motion.a>
+            <motion.a href="https://mail.google.com/mail/?view=cm&fs=1&to=shreyasacharya3000@gmail.com" target="_blank" rel="noopener noreferrer" variants={iconVariants} whileHover={{ scale: 1.1, color: '#10fcf0' }} transition={{ duration: 0.2 }}><SiGmail /></motion.a>
+            <motion.a href="https://medium.com/@shreyasacharya3000" target="_blank" rel="noopener noreferrer" variants={iconVariants} whileHover={{ scale: 1.1, color: '#10fcf0' }} transition={{ duration: 0.2 }}><FaMedium /></motion.a>
+            <motion.a href="/resume/resume.pdf" target="_blank" rel="noopener noreferrer" variants={iconVariants} whileHover={{ scale: 1.1, color: '#10fcf0' }} transition={{ duration: 0.2 }}><FaFileAlt /></motion.a>
           </SocialIcons>
         </motion.div>
       </SocialContainer>
