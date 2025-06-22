@@ -5,7 +5,7 @@ import { FaGithub, FaGlobe } from 'react-icons/fa';
 import { FaRepeat } from 'react-icons/fa6';
 import { PiCubeFocusFill } from 'react-icons/pi';
 import { SiPython, SiPytorch, SiHuggingface, SiGooglegemini, SiOpencv, SiOpenai, SiNumpy, SiScipy,
-  SiTensorflow, SiKeras, SiScikitlearn, SiOnnx, SiFlask, SiMeta, SiReact, SiTypescript, SiNodedotjs} from 'react-icons/si';
+  SiTensorflow, SiKeras, SiScikitlearn, SiMeta, SiReact, SiTypescript, SiNodedotjs} from 'react-icons/si';
 
 // Importing assets for project GIFs
 import mllmtcGif from '../../assets/projects/MLLMTC.gif';
@@ -314,34 +314,6 @@ const TechStackItem = styled.div`
   }
 `;
 
-// Handle the "Coming Soon" click event
-const handleComingSoonClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-  event.preventDefault(); /* Prevent the default link behavior */
-  alert('Coming soon!'); /* Show an alert when clicked */
-};
-
-const OtherProjectsTile = styled(SmallProject)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background: rgba(16, 252, 240, 0.1);
-  border: 2px dashed rgba(16, 252, 240, 0.4);
-  transition: all 0.3s ease;
-
-  p {
-    font-size: 1.1em;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0;
-    font-weight: bold;
-  }
-
-  &:hover {
-    background: rgba(16, 252, 240, 0.2);
-    border-color: rgba(16, 252, 240, 0.7);
-    transform: translateY(-5px);
-  }
-`;
 
 const NoteworthyProjectTile = styled(SmallProject)`
   display: flex;
@@ -470,9 +442,6 @@ const Projects: React.FC = () => {
               <a href="https://github.com/StarkGoku10/Video-Temporal-Consistency-Analysis.git" target="_blank" rel="noopener noreferrer">
                 <FaGithub /> See on GitHub
               </a>
-              {/* <a href="#" onClick={handleComingSoonClick}>
-                <FaGlobe /> Try it Out
-              </a> */}
             </div>
           </ProjectContainer>
         </AnimatedItem>

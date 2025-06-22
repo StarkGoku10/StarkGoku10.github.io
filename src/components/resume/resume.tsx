@@ -3,15 +3,6 @@ import styled, { keyframes } from 'styled-components';
 import { motion, useInView } from 'framer-motion';
 import './resume.scss';
 
-const underline = keyframes`
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-`;
-
-const underlineReverse = keyframes`
-  from { transform: scaleX(1); }
-  to { transform: scaleX(0); }
-`;
 
 const HoverText = styled.span`
   position: relative;

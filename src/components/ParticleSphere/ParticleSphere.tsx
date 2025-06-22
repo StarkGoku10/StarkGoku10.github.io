@@ -9,6 +9,50 @@ const Canvas = styled.canvas`
   height: 100%;
 `;
 
+// --- Static Constants Moved Outside Component ---
+// Measured & Tuned Parameters from GIF Analysis
+const PARTICLE_COUNT = 2400;
+const PARTICLE_COLOR = '#21dfE6'; // Cyan
+
+// Sphere Physics
+const ROTATION_SPEED = 0.05;
+const BROWNIAN_MOTION = 0.15; // "Boiling" effect on sphere surface
+const FORMATION_DURATION = 2500; // in milliseconds
+const FORMATION_DELAY = 3200; // Delay before the sphere starts forming (matches resume button)
+
+// Mouse Interaction
+const MOUSE_REPEL_RADIUS = 100;
+const MOUSE_REPEL_STRENGTH = 1.5;
+const OFFSET_DECAY = 0.95; // Damping factor for spring-back effect
+
+// Leaking Particle Physics
+const LEAK_PROBABILITY = 0.001;
+const LEAK_VELOCITY = 1.0;
+const DRAG_FORCE = 0.985;
+
+const NORMAL_LIFESPAN = 300;
+const LIFESPAN_VARIATION = 150;
+const SHORT_LIFESPAN_THRESHOLD = NORMAL_LIFESPAN + 50;
+
+// Super Traveler Layer
+const SUPER_TRAVELER_PROBABILITY = 0.20; // Represents 20% of leaks (19% Super + 0.7% Ultra + 0.3% Mega)
+const SUPER_TRAVELER_LIFESPAN = 600;
+
+// Ultra Traveler Layer (a subset of Super Travelers)
+const ULTRA_TRAVELER_PROBABILITY = 0.05; // 5% of the 20% are Ultra or greater (1% absolute)
+const ULTRA_LIFESPAN_MULTIPLIER_MIN = 5;   // New: 5x lifespan
+const ULTRA_LIFESPAN_MULTIPLIER_MAX = 15;  // New: 15x lifespan
+const ULTRA_GROWTH_FACTOR = 5.0;
+const ULTRA_SHRINK_FACTOR = -1.2;
+
+// Mega Traveler Layer (a subset of Ultra Travelers)
+const MEGA_TRAVELER_PROBABILITY = 0.30; // 30% of the 1% become Mega (0.3% absolute)
+const MEGA_DRIFT_MULTIPLIER = 1.0;      // Fixed 100% extra distance
+
+// Visuals
+const MIN_RADIUS = 0.5;
+const MAX_RADIUS = 2.0;
+
 interface Particle {
   // Core 3D position & state
   x: number;
@@ -54,50 +98,6 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ mousePosition }) => {
   const particlesRef = useRef<Particle[]>([]);
   const mousePositionRef = useRef<{ x: number; y: number } | null>(null);
   const formationStartTimeRef = useRef<number | null>(null);
-
-  // --- Measured & Tuned Parameters from GIF Analysis ---
-  const PARTICLE_COUNT = 2400;
-  const PARTICLE_COLOR = '#21dfE6'; // Cyan
-
-  // Sphere Physics
-  const ROTATION_SPEED = 0.05;
-  const BROWNIAN_MOTION = 0.15; // "Boiling" effect on sphere surface
-  const FORMATION_DURATION = 2500; // in milliseconds
-  const FORMATION_DELAY = 3200; // Delay before the sphere starts forming (matches resume button)
-
-  // Mouse Interaction
-  const MOUSE_REPEL_RADIUS = 100;
-  const MOUSE_REPEL_STRENGTH = 1.5;
-  const OFFSET_DECAY = 0.95; // Damping factor for spring-back effect
-
-  // Leaking Particle Physics
-  const LEAK_PROBABILITY = 0.001;
-  const LEAK_VELOCITY = 1.0;
-  const DRAG_FORCE = 0.985;
-  
-  const NORMAL_LIFESPAN = 300;
-  const LIFESPAN_VARIATION = 150;
-  const SHORT_LIFESPAN_THRESHOLD = NORMAL_LIFESPAN + 50;
-
-  // Super Traveler Layer
-  const SUPER_TRAVELER_PROBABILITY = 0.20; // Represents 20% of leaks (19% Super + 0.7% Ultra + 0.3% Mega)
-  const SUPER_TRAVELER_LIFESPAN = 600;
-
-  // Ultra Traveler Layer (a subset of Super Travelers)
-  const ULTRA_TRAVELER_PROBABILITY = 0.05; // 5% of the 20% are Ultra or greater (1% absolute)
-  const ULTRA_LIFESPAN_MULTIPLIER_MIN = 5;   // New: 5x lifespan
-  const ULTRA_LIFESPAN_MULTIPLIER_MAX = 15;  // New: 15x lifespan
-  const ULTRA_GROWTH_FACTOR = 5.0;
-  const ULTRA_SHRINK_FACTOR = -1.2;
-  
-  // Mega Traveler Layer (a subset of Ultra Travelers)
-  const MEGA_TRAVELER_PROBABILITY = 0.30; // 30% of the 1% become Mega (0.3% absolute)
-  const MEGA_DRIFT_MULTIPLIER = 1.0;      // Fixed 100% extra distance
-
-  // Visuals
-  const MIN_RADIUS = 0.5;
-  const MAX_RADIUS = 2.0;
-  // --- End of Parameters ---
 
   const createParticle = (index: number): Particle => {
     const theta = Math.random() * 2 * Math.PI;
@@ -326,7 +326,7 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ mousePosition }) => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, []); // Empty dependency array since all constants are now static
 
   return <Canvas ref={canvasRef} />;
 };

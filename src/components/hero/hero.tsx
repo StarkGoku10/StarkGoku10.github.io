@@ -3,21 +3,46 @@ import styled, { keyframes, css } from 'styled-components';
 import { motion } from 'framer-motion';
 import ParticleSphere from '../ParticleSphere/ParticleSphere'; // Import the new component
 
+// Static arrays moved outside component to prevent recreation on every render
+const TOP_LINES = [
+  "You're finally awake. Let's explore my work.",
+  "Interfacing reality with imagination — one model at a time.",
+  "Not all heroes wear capes. Some fine-tune PyTorch models.",
+  "Crafting intelligent systems, one adventure at a time.",
+  "Greetings! I'm thrilled to have you here.",
+  "This is the part where you scroll down and everything starts making sense.",
+  "It's dangerous to go alone! Take this portfolio.",
+  "I build things that see, think, and move — and they're all right here!",
+  "It started with a passion for learning. It led here. Dive in.",
+  "One portfolio to rule them all.",
+];
+
+const TYPEWRITER_TEXTS = [
+  "Software Engineer",
+  "Machine Learning Engineer",
+  "Ex-Software Engineer @ techR Business Solutions ",
+  "AI Enthusiast",
+  "F1 Fanatic",
+  "Part-time Athlete",
+  "Gamer",
+  "Home Chef",
+];
+
 // Particle interface for 3D sphere animation
-interface Particle {
-  x: number;
-  y: number;
-  z: number; // Added Z coordinate for 3D
-  vx: number;
-  vy: number;
-  vz: number; // Added Z velocity for 3D movement
-  radius: number;
-  color: string;
-  opacity: number; // For fade effects
-  originalTheta: number; // Spherical coordinates
-  originalPhi: number;
-  sphereRadius: number; // Distance from sphere center
-}
+// interface Particle {
+//   x: number;
+//   y: number;
+//   z: number; // Added Z coordinate for 3D
+//   vx: number;
+//   vy: number;
+//   vz: number; // Added Z velocity for 3D movement
+//   radius: number;
+//   color: string;
+//   opacity: number; // For fade effects
+//   originalTheta: number; // Spherical coordinates
+//   originalPhi: number;
+//   sphereRadius: number; // Distance from sphere center
+// }
 
 // Main container for the hero section
 const HeroContainer = styled.section`
@@ -73,25 +98,6 @@ const RightContainer = styled.div`
   }
 `;
 
-// Canvas for particle system
-const ParticleCanvas = styled.canvas`
-  width: 100%;
-  height: 100%;
-  cursor: crosshair;
-`;
-
-// Floating animation for the hero image
-const floatAnimation = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-`;
 
 // Styling for the gradient text (title)
 const GradientText = styled.h2`
@@ -221,43 +227,19 @@ const Hero: React.FC = () => {
     setMousePosition(null);
   };
 
-  const topLines = [
-    "You're finally awake. Let's explore my work.",
-    "Interfacing reality with imagination — one model at a time.",
-    "Not all heroes wear capes. Some fine-tune PyTorch models.",
-    "Crafting intelligent systems, one adventure at a time.",
-    "Greetings! I'm thrilled to have you here.",
-    "This is the part where you scroll down and everything starts making sense.",
-    "It's dangerous to go alone! Take this portfolio.",
-    "I build things that see, think, and move — and they're all right here!",
-    "It started with a passion for learning. It led here. Dive in.",
-    "One portfolio to rule them all.",
-  ]; // Array of possible headline texts
-
-  const typewriterTexts = [
-    "Software Engineer",
-    "Machine Learning Engineer",
-    "Ex-Software Engineer @ techR Business Solutions ",
-    "AI Enthusiast",
-    "F1 Fanatic",
-    "Part-time Athlete",
-    "Gamer",
-    "Home Chef",
-  ]; // Array of texts for the typewriter effect
-
   useEffect(() => {
     // Pick a random top line for the header when the component mounts
-    setTopLine(topLines[Math.floor(Math.random() * topLines.length)]);
-  }, []);
+    setTopLine(TOP_LINES[Math.floor(Math.random() * TOP_LINES.length)]);
+  }, []); // Empty dependency array since TOP_LINES is now static
 
   useEffect(() => {
     // Set the initial static text
-    setCurrentText(typewriterTexts[0]);
+    setCurrentText(TYPEWRITER_TEXTS[0]);
 
     const typeWriter = () => {
       let i = 0;
-      let textPos = typewriterTexts[0].length; // Start at the end of the first word
-      let currentString = typewriterTexts[0];
+      let textPos = TYPEWRITER_TEXTS[0].length; // Start at the end of the first word
+      let currentString = TYPEWRITER_TEXTS[0];
       const speed = 100; // Typing speed
       const deleteSpeed = 50; // Deleting speed
       const initialWaitTime = 2000; // Time before deleting the first word
@@ -279,8 +261,8 @@ const Hero: React.FC = () => {
         setCurrentText(currentString.substring(0, textPos) + '_'); // Add typing cursor while deleting
 
         if (textPos-- === 0) {
-          i = (i + 1) % typewriterTexts.length; // Cycle through text array
-          currentString = typewriterTexts[i]; // Get next string
+          i = (i + 1) % TYPEWRITER_TEXTS.length; // Cycle through text array
+          currentString = TYPEWRITER_TEXTS[i]; // Get next string
           setTimeout(type, speed); // Start typing again
         } else {
           setTimeout(deleteText, deleteSpeed); // Continue deleting
@@ -294,7 +276,7 @@ const Hero: React.FC = () => {
     const timer = setTimeout(typeWriter, 4000); // Delay the start of the entire effect
 
     return () => clearTimeout(timer); // Cleanup timer on unmount
-  }, []);
+  }, []); // Empty dependency array since TYPEWRITER_TEXTS is now static
 
   const containerVariants = {
     hidden: { opacity: 0 },
