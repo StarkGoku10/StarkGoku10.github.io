@@ -148,7 +148,7 @@ const Header: React.FC = () => {
         </motion.a>
         <motion.a href="#resume" className="nav-link" onClick={(e) => handleClick(e, 'resume')} variants={navItemVariants}>
           <FaFileAlt />
-          Education
+          Experience
         </motion.a>
         <motion.a href="#contact" className="nav-link" onClick={(e) => handleClick(e, 'social-links')} variants={navItemVariants}>
           <FaEnvelope />
