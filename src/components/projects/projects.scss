@@ -1,0 +1,22 @@
+.projects-title-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+.projects-title-line {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 10px;
+
+  .line {
+    height: 2px;
+    background: linear-gradient(90deg, #10fcf0, transparent);
+    flex: 0 1 1000px; /* Increased max-width of the line */
+    min-width: 100px;
+    transform-origin: right;
+  }
+} 
