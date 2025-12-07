@@ -3,30 +3,30 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import ParticleSphere from '../ParticleSphere/ParticleSphere'; // Import the new component
 
-// Static arrays moved outside component to prevent recreation on every render
-const TOP_LINES = [
-  "You're finally awake. Let's explore my work.",
-  "Interfacing reality with imagination — one model at a time.",
-  "Not all heroes wear capes. Some fine-tune PyTorch models.",
-  "Crafting intelligent systems, one adventure at a time.",
-  "Greetings! I'm thrilled to have you here.",
-  "This is the part where you scroll down and everything starts making sense.",
-  "It's dangerous to go alone! Take this portfolio.",
-  "I build things that see, think, and move — and they're all right here!",
-  "It started with a passion for learning. It led here. Dive in.",
-  "One portfolio to rule them all.",
-];
+// // Static arrays moved outside component to prevent recreation on every render
+// const TOP_LINES = [
+//   "You're finally awake. Let's explore my work.",
+//   "Interfacing reality with imagination — one model at a time.",
+//   "Not all heroes wear capes. Some fine-tune PyTorch models.",
+//   "Crafting intelligent systems, one adventure at a time.",
+//   "Greetings! I'm thrilled to have you here.",
+//   "This is the part where you scroll down and everything starts making sense.",
+//   "It's dangerous to go alone! Take this portfolio.",
+//   "I build things that see, think, and move — and they're all right here!",
+//   "It started with a passion for learning. It led here. Dive in.",
+//   "One portfolio to rule them all.",
+// ];
 
-const TYPEWRITER_TEXTS = [
-  "Software Engineer",
-  "Machine Learning Engineer",
-  "Ex-Software Engineer @ techR Business Solutions ",
-  "AI Enthusiast",
-  "F1 Fanatic",
-  "Part-time Athlete",
-  "Gamer",
-  "Home Chef",
-];
+// const TYPEWRITER_TEXTS = [
+//   "Software Engineer",
+//   "Machine Learning Engineer",
+//   "Ex-Software Engineer @ techR Business Solutions ",
+//   "AI Enthusiast",
+//   "F1 Fanatic",
+//   "Part-time Athlete",
+//   "Gamer",
+//   "Home Chef",
+// ];
 
 // Particle interface for 3D sphere animation
 // interface Particle {
