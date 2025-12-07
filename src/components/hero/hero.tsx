@@ -227,6 +227,30 @@ const Hero: React.FC = () => {
     setMousePosition(null);
   };
 
+  const topLines = [
+    "You're finally awake. Let's explore my work.",
+    "Interfacing reality with imagination — one model at a time.",
+    "Not all heroes wear capes. Some fine-tune PyTorch models.",
+    "Crafting intelligent systems, one adventure at a time.",
+    "Greetings! I'm thrilled to have you here.",
+    "This is the part where you scroll down and everything starts making sense.",
+    "It's dangerous to go alone! Take this portfolio.",
+    "I build things that see, think, and move — and they're all right here!",
+    "It started with a passion for learning. It led here. Dive in.",
+    "One portfolio to rule them all.",
+  ]; // Array of possible headline texts
+
+  const typewriterTexts = [
+    "Software Engineer",
+    "Machine Learning Engineer",
+    "Ex-Software Engineer @ techR Business Solutions ",
+    "AI Enthusiast",
+    "F1 Fanatic",
+    "Part-time Athlete",
+    "Gamer",
+    "Home Chef",
+  ]; // Array of texts for the typewriter effect
+
   useEffect(() => {
     // Pick a random top line for the header when the component mounts
     setTopLine(TOP_LINES[Math.floor(Math.random() * TOP_LINES.length)]);
@@ -311,7 +335,7 @@ const Hero: React.FC = () => {
           <JobSeekingText>
             My playground is the intersection of <HighlightedText>Language</HighlightedText>, <HighlightedText>Vision</HighlightedText>, and <HighlightedText>Action</HighlightedText>. I'm driven to build Multimodal AI Systems that can perceive and interact with the world in new ways.
             <br /><br />
-            Actively seeking full-time roles in Software Engineering, AI and Robotics for 2025.
+            Actively seeking full-time roles in Software Engineering, AI and Robotics for 2026.
             Feel free to <ReachOutLink href="https://www.linkedin.com/in/shreyas-acharya-10gma/" target="_blank" rel="noopener noreferrer">reach out</ReachOutLink> if you're looking for a passionate engineer to help build something amazing.
           </JobSeekingText>
         </motion.div>
