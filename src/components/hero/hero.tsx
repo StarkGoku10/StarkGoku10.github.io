@@ -227,7 +227,7 @@ const Hero: React.FC = () => {
     setMousePosition(null);
   };
 
-  const topLines = [
+  const TOP_LINES = [
     "You're finally awake. Let's explore my work.",
     "Interfacing reality with imagination — one model at a time.",
     "Not all heroes wear capes. Some fine-tune PyTorch models.",
@@ -240,7 +240,7 @@ const Hero: React.FC = () => {
     "One portfolio to rule them all.",
   ]; // Array of possible headline texts
 
-  const typewriterTexts = [
+  const TYPEWRITER_TEXTS = [
     "AI Research Engineer @ Williams-Sonoma, Inc.",
     "3D Vision Efficianado",
     "AI Enthusiast",
