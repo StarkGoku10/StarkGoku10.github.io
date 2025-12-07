@@ -86,7 +86,7 @@ const About: React.FC = () => {
             Hello All! My name is <span className="cyan-text">Shreyas Acharya</span>.
             I'm a <span className="cyan-text">Builder</span> with a love for cutting edge technology. I specialize in <span className="cyan-text">3D Vision</span>,
             <span className="cyan-text"> Multimodal AI</span>, <span className="cyan-text"> Computer Vision </span> and <span className="cyan-text"> Generative AI</span>.
-            I am currently working at <span className="cyan-text">William Sonoma Inc.</span> as a <span className="cyan-text">AI Research Engineer</span>, building <span className="cyan-text">Generative AI</span> systems for the retail industry.
+            I am currently working at <span className="cyan-text">Williams-Sonoma, Inc.</span> as an <span className="cyan-text">AI Research Engineer</span>, building <span className="cyan-text">Generative AI</span> systems for the retail industry.
           </motion.p>
           <motion.p variants={textChildVariants}>
             I wrapped up my Masters in Robotics from University of Maryland, College Park. During my time at UMD, I worked on implementing and developing a novel deep reinforcement learning

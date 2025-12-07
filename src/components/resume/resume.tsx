@@ -112,7 +112,7 @@ const Resume: React.FC = () => {
               <motion.div className="job-container" variants={jobContainerVariants}>
                   <motion.div className="timeline-tick" variants={timelineTickVariants} />
                   <motion.h3 className="job-title" variants={jobContentVariants}>
-                    <HoverText>AI Research Engineer</HoverText> <span className="company">@ William Sonoma Inc.</span>
+                    <HoverText>AI Research Engineer</HoverText> <span className="company">@ Williams-Sonoma, Inc.</span>
                   </motion.h3>
                   <motion.p className="job-dates" variants={jobContentVariants}>November 2025 - Present</motion.p>
                   <motion.ul variants={jobContentVariants}>
