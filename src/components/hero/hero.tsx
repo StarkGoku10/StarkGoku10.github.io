@@ -241,9 +241,8 @@ const Hero: React.FC = () => {
   ]; // Array of possible headline texts
 
   const typewriterTexts = [
-    "Software Engineer",
-    "Machine Learning Engineer",
-    "Ex-Software Engineer @ techR Business Solutions ",
+    "AI Research Engineer @ Williams-Sonoma, Inc.",
+    "3D Vision Efficianado",
     "AI Enthusiast",
     "F1 Fanatic",
     "Part-time Athlete",
