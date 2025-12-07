@@ -117,6 +117,19 @@ const Resume: React.FC = () => {
 
             <div className="line-container">
               <motion.div className="timeline-line" variants={timelineLineVariants} />
+              {/* Current Job */}
+              <motion.div className="job-container" variants={jobContainerVariants}>
+                  <motion.div className="timeline-tick" variants={timelineTickVariants} />
+                  <motion.h3 className="job-title" variants={jobContentVariants}>
+                    <HoverText>AI Research Engineer</HoverText> <span className="company">@ William Sonoma Inc.</span>
+                  </motion.h3>
+                  <motion.p className="job-dates" variants={jobContentVariants}>November 2025 - Present</motion.p>
+                  <motion.ul variants={jobContentVariants}>
+                    <li className="bullet-point">
+                    Building Generative and Deep learning models for the retail industry to improve the customer interaction and experience.
+                    </li>
+                  </motion.ul>
+                </motion.div>
               <motion.div variants={jobListVariants}>
                 {/* Job 1 */}
                 <motion.div className="job-container" variants={jobContainerVariants}>
@@ -141,28 +154,6 @@ const Resume: React.FC = () => {
                   </motion.ul>
                 </motion.div>
 
-                {/* Job 2 */}
-                <motion.div className="job-container" variants={jobContainerVariants}>
-                  <motion.div className="timeline-tick" variants={timelineTickVariants} />
-                  <motion.h3 className="job-title" variants={jobContentVariants}>
-                    <HoverText>Software Engineer</HoverText> <span className="company">@ techR Business Solutions</span>
-                  </motion.h3>
-                  <motion.p className="job-dates" variants={jobContentVariants}>June 2022 - July 2023</motion.p>
-                  <motion.ul variants={jobContentVariants}>
-                    <li className="bullet-point">
-                    Architected and deployed a real-time Human Activity Recognition system  with optimized ONNX model and 
-                    16-frame temporal window analysis, reducing false positive alerts by 35% for automated monitoring.
-                    </li>
-                    <li className="bullet-point">
-                    Engineered a hybrid multi-threaded application architecture combining Kivy desktop GUI with Flask web interface and WebSocket communication,
-                    enabling concurrent real-time video monitoring and cross-platform monitoring while reducing system latency by 25%.
-                    </li>
-                    <li className="bullet-point">
-                    Developed an intelligent action detection pipeline with context-aware alert mechanisms, incorporating temporal analysis and smart triggering logic
-                    that improved detection accuracy by 28% over baseline models, enabling real-time intervention capabilities for fall detection systems.
-                    </li>
-                  </motion.ul>
-                </motion.div>
               </motion.div>
             </div>
           </motion.div>

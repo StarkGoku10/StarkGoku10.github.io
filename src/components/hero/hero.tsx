@@ -235,9 +235,9 @@ const Hero: React.FC = () => {
   ]; // Array of possible headline texts
 
   const typewriterTexts = [
+    "AI Research Engineer @ William Sonoma Inc.",
     "Software Engineer",
-    "Machine Learning Engineer",
-    "Ex-Software Engineer @ techR Business Solutions ",
+    "3D Vision Efficianado",
     "AI Enthusiast",
     "F1 Fanatic",
     "Part-time Athlete",
@@ -329,7 +329,7 @@ const Hero: React.FC = () => {
           <JobSeekingText>
             My playground is the intersection of <HighlightedText>Language</HighlightedText>, <HighlightedText>Vision</HighlightedText>, and <HighlightedText>Action</HighlightedText>. I'm driven to build Multimodal AI Systems that can perceive and interact with the world in new ways.
             <br /><br />
-            Actively seeking full-time roles in Software Engineering, AI and Robotics for 2025.
+            Actively seeking full-time roles in Software Engineering, AI and Robotics for 2026.
             Feel free to <ReachOutLink href="https://www.linkedin.com/in/shreyas-acharya-10gma/" target="_blank" rel="noopener noreferrer">reach out</ReachOutLink> if you're looking for a passionate engineer to help build something amazing.
           </JobSeekingText>
         </motion.div>

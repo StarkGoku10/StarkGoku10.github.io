@@ -84,23 +84,19 @@ const About: React.FC = () => {
         >
           <motion.p variants={textChildVariants}>
             Hello All! My name is <span className="cyan-text">Shreyas Acharya</span>.
-            I'm an aspiring Software Engineer with a love for cutting edge technology. I specialize in <span className="cyan-text">Machine Learning</span>,
-            <span className="cyan-text"> Multimodal AI</span>, <span className="cyan-text"> Perception </span> and <span className="cyan-text"> Planning</span> for Robotic Systems.
-            I just wrapped up my  Masters in Robotics from University of Maryland, College Park.
+            I'm a <span className="cyan-text">Builder</span> with a love for cutting edge technology. I specialize in <span className="cyan-text">3D Vision</span>,
+            <span className="cyan-text"> Multimodal AI</span>, <span className="cyan-text"> Computer Vision </span> and <span className="cyan-text"> Generative AI</span>.
+            I am currently working at <span className="cyan-text">William Sonoma Inc.</span> as a <span className="cyan-text">AI Research Engineer</span>, building <span className="cyan-text">Generative AI</span> systems for the retail industry.
           </motion.p>
           <motion.p variants={textChildVariants}>
-            During my time at UMD, I worked on implementing and developing a novel deep reinforcement learning
+            I wrapped up my Masters in Robotics from University of Maryland, College Park. During my time at UMD, I worked on implementing and developing a novel deep reinforcement learning
             agent for tactile sensing and reconstruction of real-world objects using a TACTO sensor. The agent achieved over
-            <span className="cyan-text"> 95% accuracy</span> in reconstructing 3D objects.
-          </motion.p>
-          <motion.p variants={textChildVariants}>
-            Previously, as a <span className="cyan-text">Software Engineer at techR Business Solutions</span>, I worked on developing a comprehensive pipeline for deploying a real-time action recognition model
-            to detect and classify distinct human actions for custom warehouse security with over <span className="cyan-text">85%% accuracy</span>.
+            <span className="cyan-text"> 99% accuracy</span> in reconstructing 3D objects.
           </motion.p>
           <motion.p variants={textChildVariants}>
            Outside of tech, I stay active by <span className="cyan-text">playing football</span> and <span className="cyan-text">working out</span>. 
            I'm also a huge fan of <span className="cyan-text">Motorsport</span>, particularly <span className="cyan-text">Formula 1</span>, often known as <span className="cyan-text">the Pinnacle of Motorsport</span>.
-           I also unwind by listening to <span className="cyan-text">music</span> or watching <span className="cyan-text">movies</span> with friends
+           I also unwind by listening to <span className="cyan-text">music</span> or <span className="cyan-text">travelling</span> with friends
            or playing <span className="cyan-text">Open-world games</span>.
           </motion.p>
         </motion.div>
