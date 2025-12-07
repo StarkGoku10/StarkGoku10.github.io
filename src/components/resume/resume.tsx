@@ -131,7 +131,7 @@ const Resume: React.FC = () => {
                   <motion.p className="job-dates" variants={jobContentVariants}>January 2024 - June 2024</motion.p>
                   <motion.ul variants={jobContentVariants}>
                     <li className="bullet-point">
-                    Developed an end-to-end Deep Reinforcement Learning agent for 3D object reconstruction using tactile sensing, achieving 95% surface coverage (IoU) 
+                    Developed an end-to-end Deep Reinforcement Learning agent for 3D object reconstruction using tactile sensing, achieving 99% surface coverage (IoU) 
                     on unseen objects through a novel CNN-based policy network and temporal tactile stacking approach.
                     </li>
                     <li className="bullet-point">
